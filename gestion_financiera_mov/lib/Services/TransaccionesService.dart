@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:gestion_financiera_mov/Entities/Transaccion.dart';
 import 'package:gestion_financiera_mov/Entities/Usuario.dart';
+import 'package:gestion_financiera_mov/Enums/CategoriasType.dart';
 import 'package:gestion_financiera_mov/Services/Interfaces/ITransaccionService.dart';
 
 class TransaccionesService implements ITransaccionesService{
@@ -8,6 +9,7 @@ class TransaccionesService implements ITransaccionesService{
   Usuario ingreso_usuario(Usuario usuario) {
     // TODO: implement ingreso_usuario
     var user = usuario;
+    List<CategoriasType> categoria = CategoriasType.values.toList();
     print('Introduce la cantidad a ingresar:'); 
     double? ingreso = double.tryParse(stdin.readLineSync().toString());
     print('Introduzca el concepto de la operación: ');
@@ -62,5 +64,27 @@ class TransaccionesService implements ITransaccionesService{
     saldo.total = ingresos - retiros; // Cálculo del saldo total
   return saldo;
   }
-
+  
+  @override
+  Usuario obtener_categorias(Usuario usuario) {
+    // TODO: implement obtener_categorias
+    var user = usuario;
+    var flag = false;
+    int opcion = 0; // Inicialización
+    List<CategoriasType> categoria = CategoriasType.values.toList();
+    while (!flag) {
+      print('Seleccione una categoría: ');
+      for (var item in categoria) {
+        print('${item.index} ${item.name}');
+      }
+      opcion = int.tryParse(stdin.readLineSync().toString()) ?? -1; // Verificación
+      if (opcion < 0 || opcion >= categoria.length) {
+        print('Seleccione una categoría válida.');
+      } else {
+        user.categoria = categoria.elementAt(opcion).name;
+        flag = true;
+      }
+    }
+    return user;
+  }
 }

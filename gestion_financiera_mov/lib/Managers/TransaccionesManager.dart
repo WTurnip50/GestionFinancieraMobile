@@ -15,4 +15,7 @@ class TransaccionesManager{
   Transaccion get_saldo(List<Usuario>users){
     return _service.calcular_saldo(users);
   }
+  Usuario set_categoria(Usuario usuario){
+    return _service.obtener_categorias(usuario);
+  }
 }

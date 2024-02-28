@@ -4,7 +4,6 @@ import 'package:gestion_financiera_mov/Managers/TransaccionesManager.dart';
 import 'package:gestion_financiera_mov/Services/TransaccionesService.dart';
 
 void main(List<String> arguments) {
-  //print('Hello world: ${gestion_financiera_mov.calculate()}!');
   print('Introduce el nombre de usuario');
   String? nombre = stdin.readLineSync();
   print('Bienvenido $nombre:');
@@ -23,6 +22,8 @@ void main(List<String> arguments) {
     switch(opcion){
       case 1:
         Usuario user = managers.set_ingreso_usuario(add);
+        var u = managers.set_categoria(user);
+        user.categoria = u.categoria;
         operaciones.add(user);
       break;
       case 2:
@@ -30,6 +31,8 @@ void main(List<String> arguments) {
         var transaccion = managers.get_saldo(operaciones);
         if(transaccion.total > 0){
           Usuario user = managers.set_retiro_usuario(add, transaccion);
+          var u = user;
+          user = managers.set_categoria(u);
           operaciones.add(user);
         }else{
           print('No cuenta con saldo disponible, favor de ingresar saldo.');
@@ -39,6 +42,9 @@ void main(List<String> arguments) {
         print('No existen operaciones registradas.');
         print('==================================');
       }
+      break;
+      case 3:
+
       break;
       case 5:
       salir = true;
