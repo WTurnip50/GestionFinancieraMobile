@@ -9,7 +9,6 @@ class TransaccionesService implements ITransaccionesService{
   Usuario ingreso_usuario(Usuario usuario) {
     // TODO: implement ingreso_usuario
     var user = usuario;
-    List<CategoriasType> categoria = CategoriasType.values.toList();
     print('Introduce la cantidad a ingresar:'); 
     double? ingreso = double.tryParse(stdin.readLineSync().toString());
     print('Introduzca el concepto de la operación: ');
